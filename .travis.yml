@@ -1,20 +1,23 @@
 language: node_js
 node_js:
-  - stable
-
-install: npm install
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
 services:
   - postgresql
 
-cache:
-  directories:
-    - node_modules
+env:
+  global:
+  - NODE_ENV=test
 
 before_script:
 - psql -c 'CREATE DATABASE "teamwork-test";' -U postgres
 - psql -c "CREATE USER me WITH PASSWORD 'password';" -U postgres
 
-script:
+  script:
   - npm run test
 after_script:
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
