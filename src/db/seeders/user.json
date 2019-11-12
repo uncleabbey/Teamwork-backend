@@ -1,0 +1,46 @@
+[
+  {  
+    "email": "admin@example.com",
+    "password": "123456",
+    "first_name": "Aliko",
+    "last_name": "Dangote",
+    "is_admin": true,
+    "gender": "Female",
+    "job_role": "CEO",
+    "department": "Admin",
+    "address": "Alakia, Ibadan"
+  },
+  {
+    "email": "johnDoe@example.com",
+    "password": "123456",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_admin": true,
+    "gender": "Male",
+    "job_role": "Assistant",
+    "department": "HR",
+    "address": "Pasedena, California"
+  },
+  {
+    "email": "richardCypher@gmail.com",
+    "password": "123456",
+    "first_name": "Richard",
+    "last_name": "Cypher",
+    "is_admin": true,
+    "gender": "Male",
+    "job_role": "Manager",
+    "department": "HR",
+    "address": "Ikeja, Lagos"
+  },
+  {
+    "email": "kaylanAmnell@gmail.com",
+    "password": "123456",
+    "first_name": "Kaylan",
+    "last_name": "Amnell",
+    "is_admin": true,
+    "gender": "Female",
+    "job_role": "Assistant Manager",
+    "department": "HR",
+    "address": "Pantham, Jos"
+  }
+]
