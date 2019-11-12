@@ -11,8 +11,10 @@ cache:
     - node_modules
 
 before_script:
-  - 'CREATE DATABASE "Teamwork";' -U postgres
-  - psql -c "CREATE USER Teawork WITH PASSWORD 'password';" -U postgres
+- psql -c 'CREATE DATABASE "teamwork-test";' -U postgres
+- psql -c "CREATE USER me WITH PASSWORD 'password';" -U postgres
 
 script:
   - npm run test
+after_script:
+  - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
