@@ -1,0 +1,78 @@
+{
+  "name": "teamwork",
+  "version": "1.0.0",
+  "description": "Teamwork is an internal social network for employees of an organization",
+  "main": "src/index.js",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "npm run clean && babel src -d ./dist",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
+    "start": "nodemon src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "testing": "nyc --require @babel/register mocha ./test/test.js --timeout 20000 --exit",
+    "test": "SET NODE_ENV=test && npm run db:refresh && npm run testing",
+    "db:migrate": "babel-node ./src/db/migration/migrateUp",
+    "db:unmigrate": "babel-node ./src/db/migration/migrateDown",
+    "db:seed": "babel-node ./src/db/seeders/",
+    "db:refresh": "npm run db:unmigrate && npm run db:migrate && npm run db:seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uncleabbey/Teamwork-backend.git"
+  },
+  "keywords": [
+    "social",
+    "network",
+    "node",
+    "mocha",
+    "postgress",
+    "express"
+  ],
+  "author": "uncleabbey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uncleabbey/Teamwork-backend/issues"
+  },
+  "homepage": "https://github.com/uncleabbey/Teamwork-backend#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.7.0",
+    "@babel/runtime": "^7.7.2",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.19.4",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "logger": "0.0.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.12.1",
+    "pg-promise": "^10.1.0",
+    "regenerator-runtime": "^0.13.3"
+  }
+}
