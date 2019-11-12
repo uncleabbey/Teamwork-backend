@@ -13,7 +13,7 @@
     "start": "nodemon src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "testing": "nyc --require @babel/register mocha ./test/test.js --timeout 20000 --exit",
-    "test": "SET NODE_ENV=test && npm run db:refresh && npm run testing",
+    "test": "export NODE_ENV=test && npm run db:refresh && npm run testing",
     "db:migrate": "babel-node ./src/db/migration/migrateUp",
     "db:unmigrate": "babel-node ./src/db/migration/migrateDown",
     "db:seed": "babel-node ./src/db/seeders/",
