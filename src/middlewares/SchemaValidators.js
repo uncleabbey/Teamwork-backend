@@ -1,4 +1,4 @@
-import Schema from '../utils.js/validators/schema';
+import Schema from '../utils.js/validators/Schema';
 
 const signInValidator = (req, res, next) => {
   const { error } = Schema.validate(req.body, {
