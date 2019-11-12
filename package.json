@@ -4,21 +4,20 @@
   "description": "Teamwork is an internal social network for employees of an organization",
   "main": "src/index.js",
   "scripts": {
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && babel src -d ./dist",
-    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
-    "coveralls-coverage": "coveralls < lcov.info",
-    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
     "start": "nodemon src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "testing": "nyc --require @babel/register mocha ./test/test.js --timeout 20000 --exit",
-    "test": "SET NODE_ENV=test && npm run db:refresh && npm run testing",
+    "test": "export NODE_ENV=test && npm run db:refresh && npm run testing",
+    "local-test": "SET NODE_ENV=test && npm run db:refresh && npm run testing",
     "db:migrate": "babel-node ./src/db/migration/migrate-up",
     "db:unmigrate": "babel-node ./src/db/migration/migrate-down",
     "db:seed": "babel-node ./src/db/seeders/",
-    "db:refresh": "npm run db:unmigrate && npm run db:migrate && npm run db:seed"
+    "db:refresh": "npm run db:unmigrate && npm run db:migrate && npm run db:seed",
+    "cover": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls": "coveralls < lcov.info",
+    "coverage": "npm run cover && npm run coveralls"
   },
   "repository": {
     "type": "git",
