@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && babel src -d ./dist",
-    "start": "nodemon src/index.js",
+    "start": "npm run build && node ./dist/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "testing": "nyc --require @babel/register mocha ./test/test.js --timeout 20000 --exit",
     "test": "export NODE_ENV=test && npm run db:refresh && npm run testing",
