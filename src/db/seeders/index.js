@@ -14,6 +14,7 @@ const SeedAll = async () => {
     await Promise.all(
       users.map(
         ({
+          id,
           email,
           password,
           first_name: firstName,
@@ -25,6 +26,7 @@ const SeedAll = async () => {
           address
         }) =>
           seedUser(
+            id,
             email,
             hashString(password),
             firstName,

@@ -1,6 +1,74 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import findByEmail from '../services/user';
+import userService from '../services/user';
+
+const { findByEmail, createUser } = userService;
+
+const generateToken = ({ userId, isAdmin, email }) => {
+  const token = jwt.sign(
+    {
+      userId,
+      isAdmin,
+      email
+    },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: '7 days'
+    }
+  );
+  return token;
+};
+const hashString = password => {
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+};
+
+const createEmp = (req, res) => {
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    isAdmin,
+    gender,
+    jobRole,
+    department,
+    address
+  } = req.body;
+  createUser(
+    email,
+    hashString(password),
+    firstName,
+    lastName,
+    isAdmin,
+    gender,
+    jobRole,
+    department,
+    address
+  )
+    .then(user => {
+      res.status(200).json({
+        message: 'Succesfully Created in User',
+        status: 'success',
+        data: {
+          message: 'User account successfully created',
+          userId: user.userid,
+          isAdmin: user.isadmin,
+          token: generateToken({
+            userId: user.userid,
+            isAdmin: user.isadmin,
+            email: user.email
+          })
+        }
+      });
+    })
+    .catch(error => {
+      res.status(400).json({
+        status: 'error',
+        error: error.message
+      });
+    });
+};
 
 const logIn = (req, res) => {
   const { email, password } = req.body;
@@ -9,6 +77,7 @@ const logIn = (req, res) => {
     .then(user => {
       if (!user) {
         return res.status(404).json({
+          status: 'error',
           error: new Error('User not found')
         });
       }
@@ -17,7 +86,7 @@ const logIn = (req, res) => {
         .then(valid => {
           if (!valid) {
             return res.status(401).json({
-              status: 'Error',
+              status: 'error',
               error: 'Incorrect Password'
             });
           }
@@ -30,9 +99,9 @@ const logIn = (req, res) => {
             { expiresIn: '24h' }
           );
           return res.status(200).json({
-            message: 'Succesfully Logged in User',
-            status: 'Success',
+            status: 'success',
             data: {
+              message: 'Succesfully Logged in User',
               userId: user.user_id,
               isAdmin: user.is_admin,
               token
@@ -41,17 +110,17 @@ const logIn = (req, res) => {
         })
         .catch(error => {
           return res.status(500).json({
-            status: 'Error',
+            status: 'error',
             error: error.message
           });
         });
     })
     .catch(error => {
       return res.status(500).json({
-        status: 'Error',
+        status: 'error',
         error: error.message
       });
     });
 };
 
-export default logIn;
+export default { logIn, createEmp };
