@@ -1,6 +1,5 @@
 [
   {  
-    "id": "51f7f60f-23fe-4c10-a8cb-261d6a98f436",
     "email": "admin@example.com",
     "password": "12345678",
     "first_name": "Aliko",
@@ -12,7 +11,6 @@
     "address": "Alakia, Ibadan"
   },
   {
-    "id": "fa6b41c0-6281-4e13-bd42-869f14e94708",
     "email": "johnDoe@example.com",
     "password": "12345678",
     "first_name": "John",
@@ -24,7 +22,6 @@
     "address": "Pasedena, California"
   },
   {
-    "id": "0c4a47ca-bacc-4d55-b679-79d74402b00b",
     "email": "richardCypher@gmail.com",
     "password": "12345678",
     "first_name": "Richard",
@@ -36,7 +33,6 @@
     "address": "Ikeja, Lagos"
   },
   {
-    "id": "e58fda94-e1fc-40d3-8d45-28238fb63304",
     "email": "kaylanAmnell@gmail.com",
     "password": "12345678",
     "first_name": "Kaylan",

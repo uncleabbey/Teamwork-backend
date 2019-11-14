@@ -28,7 +28,7 @@ const validUser = {
   isAdmin: true
 };
 const invalidUser = {
-  id: '4869b353-74a3-45cf-8cd7-f5295922e699',
+  id: '8',
   isAdmin: true
 };
 

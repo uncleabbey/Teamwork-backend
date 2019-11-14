@@ -23,7 +23,7 @@ const hashString = password => {
   return bcrypt.hashSync(password, salt);
 };
 
-const createEmp = (req, res) => {
+export const createEmp = (req, res) => {
   const {
     email,
     password,
@@ -70,7 +70,7 @@ const createEmp = (req, res) => {
     });
 };
 
-const logIn = (req, res) => {
+export const logIn = (req, res) => {
   const { email, password } = req.body;
   findByEmail(email)
     // eslint-disable-next-line consistent-return
@@ -122,5 +122,3 @@ const logIn = (req, res) => {
       });
     });
 };
-
-export default { logIn, createEmp };
