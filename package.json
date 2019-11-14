@@ -8,7 +8,7 @@
     "build": "npm run clean && babel src -d ./dist",
     "start": "npm run build && node ./dist/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
-    "testing": "nyc --require @babel/register mocha ./test/test.js --timeout 20000 --exit",
+    "testing": "nyc --require @babel/register mocha --timeout 20000 --exit",
     "test": "export NODE_ENV=test && npm run db:refresh && npm run testing",
     "local-test": "SET NODE_ENV=test && npm run db:refresh && npm run testing",
     "db:migrate": "babel-node ./src/db/migration/migrate-up",
@@ -74,6 +74,7 @@
     "morgan": "^1.9.1",
     "pg": "^7.12.1",
     "pg-promise": "^10.1.0",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "uuid": "^3.3.3"
   }
 }
