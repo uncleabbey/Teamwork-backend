@@ -3,9 +3,7 @@ import {
   app,
   expect,
   generateToken,
-  validUser,
-  invalidUser,
-  nonAdmin
+  invalidUser
 } from './testHelper';
 
 const url = '/api/v1/auth/create-user';
@@ -14,21 +12,29 @@ let invalidToken;
 let nonAdminToken;
 
 before(async () => {
-  const validJwt = generateToken({
-    userId: validUser.id,
-    isAdmin: validUser.isAdmin
-  });
-  token = validJwt;
+  const validJwt = await chai
+    .request(app)
+    .post('/api/v1/auth/signin')
+    .send({
+      email: 'richardCypher@gmail.com',
+      password: '12345678'
+    });
+  token = validJwt.body.data.token;
+
   const invalidJwt = generateToken({
     userId: invalidUser.id,
     isAdmin: invalidUser.isAdmin
   });
   invalidToken = invalidJwt;
-  const nonAdminValidToken = generateToken({
-    userId: nonAdmin.id,
-    isAdmin: nonAdmin.isAdmin
-  });
-  nonAdminToken = nonAdminValidToken;
+
+  const nonAdminValidJwt = await chai
+    .request(app)
+    .post('/api/v1/auth/signin')
+    .send({
+      email: 'johnDoe@example.com',
+      password: '12345678'
+    });
+  nonAdminToken = nonAdminValidJwt.body.data.token;
 });
 
 describe('Creating Employees', () => {
@@ -57,6 +63,7 @@ describe('Creating Employees', () => {
         expect(data).to.be.an('object');
         expect(data).to.have.property('isAdmin');
         expect(data).to.have.property('userId');
+        expect(data).to.have.property('message');
         done();
       });
   });

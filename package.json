@@ -72,6 +72,7 @@
     "lodash": "^4.17.15",
     "logger": "0.0.1",
     "morgan": "^1.9.1",
+    "morgan-body": "^2.4.8",
     "pg": "^7.12.1",
     "pg-promise": "^10.1.0",
     "regenerator-runtime": "^0.13.3",

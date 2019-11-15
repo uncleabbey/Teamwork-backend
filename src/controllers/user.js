@@ -4,12 +4,26 @@ import userService from '../services/user';
 
 const { findByEmail, createUser } = userService;
 
+const generateToken = ({ userId, isAdmin, email }) => {
+  const token = jwt.sign(
+    {
+      userId,
+      isAdmin,
+      email
+    },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: '7 days'
+    }
+  );
+  return token;
+};
 const hashString = password => {
   const salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
 };
 
-const createEmp = (req, res) => {
+export const createEmp = (req, res) => {
   const {
     email,
     password,
@@ -21,7 +35,6 @@ const createEmp = (req, res) => {
     department,
     address
   } = req.body;
-
   createUser(
     email,
     hashString(password),
@@ -38,8 +51,14 @@ const createEmp = (req, res) => {
         message: 'Succesfully Created in User',
         status: 'success',
         data: {
+          message: 'User account successfully created',
           userId: user.userid,
-          isAdmin: user.isadmin
+          isAdmin: user.isadmin,
+          token: generateToken({
+            userId: user.userid,
+            isAdmin: user.isadmin,
+            email: user.email
+          })
         }
       });
     })
@@ -51,7 +70,7 @@ const createEmp = (req, res) => {
     });
 };
 
-const logIn = (req, res) => {
+export const logIn = (req, res) => {
   const { email, password } = req.body;
   findByEmail(email)
     // eslint-disable-next-line consistent-return
@@ -80,9 +99,9 @@ const logIn = (req, res) => {
             { expiresIn: '24h' }
           );
           return res.status(200).json({
-            message: 'Succesfully Logged in User',
             status: 'success',
             data: {
+              message: 'Succesfully Logged in User',
               userId: user.user_id,
               isAdmin: user.is_admin,
               token
@@ -103,5 +122,3 @@ const logIn = (req, res) => {
       });
     });
 };
-
-export default { logIn, createEmp };
