@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Hello world",
+    "article": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel, quia accusamus. Adipisci optio dolor doloribus odit dolores maiores aut ducimus. Quae saepe quas quaerat at veritatis eligendi dolor, sapiente tempora. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore dolorum culpa deserunt. Fuga repudiandae cupiditate nemo, nihil, quis odio officiis quod minima iste perferendis iusto minus quas itaque qui nam",
+    "userId": 2
+  },
+  {
+    "title": "Greatest Ever",
+    "article": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel, quia accusamus. Adipisci optio dolor doloribus odit dolores maiores aut ducimus. Quae saepe quas quaerat at veritatis eligendi dolor, sapiente tempora. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore dolorum culpa deserunt. Fuga repudiandae cupiditate nemo, nihil, quis odio officiis quod minima iste perferendis iusto minus quas itaque qui nam",
+    "userId": 3
+  },
+  {
+    "title": "Ronaldo is the Greatest",
+    "article": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel, quia accusamus. Adipisci optio dolor doloribus odit dolores maiores aut ducimus. Quae saepe quas quaerat at veritatis eligendi dolor, sapiente tempora. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore dolorum culpa deserunt. Fuga repudiandae cupiditate nemo, nihil, quis odio officiis quod minima iste perferendis iusto minus quas itaque qui nam",
+    "userId": 1
+  }
+]

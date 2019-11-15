@@ -45,7 +45,7 @@ const signUpSchema = Joi.object().keys({
     .messages({
       'string.base': 'FirstName must be string',
       'string.empty': 'Please Enter a Valid First Name',
-      'any.required': 'Email is required'
+      'any.required': 'firstName is required'
     }),
   lastName: Joi.string()
     .trim()
