@@ -47,7 +47,7 @@ export const createEmp = (req, res) => {
     address
   )
     .then(user => {
-      res.status(200).json({
+      res.status(201).json({
         message: 'Succesfully Created in User',
         status: 'success',
         data: {
@@ -63,7 +63,7 @@ export const createEmp = (req, res) => {
       });
     })
     .catch(error => {
-      res.status(400).json({
+      res.status(401).json({
         status: 'error',
         error: error.message
       });

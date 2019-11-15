@@ -57,7 +57,7 @@ describe('Creating Employees', () => {
       .set('authorization', `Bearer ${token}`)
       .send(user)
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         const { data, status } = res.body;
         expect(status).to.equal('success');
         expect(data).to.be.an('object');

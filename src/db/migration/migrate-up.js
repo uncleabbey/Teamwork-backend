@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import user from './create-user';
+import article from './create-article';
 
 const migrateUp = async () => {
   try {
     await user.up();
-    console.log('Succesfully Created Table');
+    await article.up();
   } catch (error) {
     console.log(error);
   } finally {
