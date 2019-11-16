@@ -1,5 +1,7 @@
 import articles from '../services/article';
+import comments from '../services/articleComments';
 
+const { getArtComments } = comments;
 const {
   createArticles,
   getOneArticle,
@@ -30,26 +32,37 @@ const createArticle = (req, res) => {
     });
 };
 
-const getArticlebyId = (req, res) => {
+const getArticlebyId = async (req, res) => {
   const { articleId } = req.params;
-  getOneArticle(articleId)
-    .then(data => {
-      res.status(200).json({
-        status: 'success',
-        data: {
-          message: 'Article successfully retrieved',
-          id: data.articleid,
-          title: data.title,
-          article: data.article
-        }
-      });
-    })
-    .catch(error => {
-      res.status(400).json({
-        status: 'error',
-        error: error.message
-      });
+  try {
+    const data = await getOneArticle(articleId);
+    const allComments = await getArtComments(articleId);
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        message: 'Article successfully retrieved',
+        id: data.articleid,
+        title: data.title,
+        article: data.article,
+        comments: allComments.map(
+          ({
+            comment_id: commentId,
+            comment,
+            author_id: authorId
+          }) => ({
+            commentId,
+            comment,
+            authorId
+          })
+        )
+      }
     });
+  } catch (error) {
+    return res.status(400).json({
+      status: 'error',
+      error: error.message
+    });
+  }
 };
 const updateArticlebyId = (req, res) => {
   const { articleId } = req.params;

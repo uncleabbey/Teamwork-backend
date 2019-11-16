@@ -13,6 +13,12 @@ from articles a
 inner join users u ON a.user_id = u.id
 where a.article_id = $1;
 `;
+const getArtCommentQuery = `
+SELECT comment_id, comment, author_id
+FROM article_comments
+WHERE article_id = $1;
+`;
+
 const updateArticleQuery = `
 UPDATE articles SET title=$1, article=$2 
 WHERE article_id=$3
@@ -71,6 +77,19 @@ export default {
         .none(deleteArticleQuery, [articleId])
         .then(() => {
           resolve();
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  },
+  getCommentbyAId: articleId => {
+    return new Promise((resolve, reject) => {
+      return db
+        .manyOrNone(getArtCommentQuery, [articleId])
+        .then(res => {
+          resolve(res);
         })
         .catch(err => {
           console.log(err);
