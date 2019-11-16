@@ -13,6 +13,11 @@ from articles a
 inner join users u ON a.user_id = u.id
 where a.article_id = $1;
 `;
+const updateArticleQuery = `
+UPDATE articles SET title=$1, article=$2 
+WHERE article_id=$3
+RETURNING title, article;
+`;
 
 export default {
   seedArticles: (title, article, userId) => {
@@ -33,6 +38,20 @@ export default {
     return new Promise((resolve, reject) => {
       return db
         .one(oneArticlesQuery, [articleId])
+        .then(res => {
+          console.log(res);
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  },
+  updateArticlebyId: (title, article, articleId) => {
+    return new Promise((resolve, reject) => {
+      return db
+        .one(updateArticleQuery, [title, article, articleId])
         .then(res => {
           console.log(res);
           resolve(res);
