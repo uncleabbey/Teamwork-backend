@@ -103,4 +103,47 @@ describe('Create Article', () => {
         done();
       });
   });
+  it('Admin and employee should update article by id', done => {
+    const articleBody = {
+      title: 'Yellow Fever by Fela',
+      article:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit..'
+    };
+    chai
+      .request(app)
+      .patch('/api/v1/articles/2')
+      .set('Accept', 'application/json')
+      .set('authorization', `Bearer ${token}`)
+      .send(articleBody)
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        const { data, status } = res.body;
+        expect(status).to.equal('success');
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('message');
+        expect(data).to.have.property('title');
+        expect(data).to.have.property('article');
+        done();
+      });
+  });
+  it('Invalid Token should not be able to update article', done => {
+    const articleBody = {
+      title: 'Yellow Fever by Fela',
+      article:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit..'
+    };
+    chai
+      .request(app)
+      .post(url)
+      .set('Accept', 'application/json')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send(articleBody)
+      .end((err, res) => {
+        expect(res).to.have.status(500);
+        const { error, status } = res.body;
+        expect(status).to.be.equal('error');
+        expect(error).to.be.equal('Invalid Request!1');
+        done();
+      });
+  });
 });

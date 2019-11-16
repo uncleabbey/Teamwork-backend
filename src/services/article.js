@@ -33,5 +33,18 @@ const getOneArticle = articleId => {
       });
   });
 };
-
-export default { createArticles, getOneArticle };
+const updateArticle = (title, article, articleId) => {
+  return new Promise((resolve, reject) => {
+    articleModel
+      .updateArticlebyId(title, article, articleId)
+      .then(res => resolve(res))
+      .catch(error => {
+        console.log(error);
+        if (error instanceof errors.QueryResultError) {
+          return reject(new Error('User not found'));
+        }
+        return reject(error);
+      });
+  });
+};
+export default { createArticles, getOneArticle, updateArticle };
