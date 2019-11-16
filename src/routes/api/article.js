@@ -4,7 +4,12 @@ import { verifyToken } from '../../middlewares/jwtToken';
 import validator from '../../middlewares/validateSchema';
 
 const { articleValidator } = validator;
-const { createArticle, getArticlebyId, updateArticlebyId } = articles;
+const {
+  createArticle,
+  getArticlebyId,
+  updateArticlebyId,
+  deleteArticlebyId
+} = articles;
 
 const router = Router();
 router.post(
@@ -21,4 +26,5 @@ router.patch(
   updateArticlebyId
 );
 
+router.delete('/articles/:articleId', verifyToken, deleteArticlebyId);
 export default router;

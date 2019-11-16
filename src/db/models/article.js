@@ -18,6 +18,9 @@ UPDATE articles SET title=$1, article=$2
 WHERE article_id=$3
 RETURNING title, article;
 `;
+const deleteArticleQuery = `
+DELETE FROM articles  WHERE article_id = $1;
+`;
 
 export default {
   seedArticles: (title, article, userId) => {
@@ -55,6 +58,19 @@ export default {
         .then(res => {
           console.log(res);
           resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  },
+  deleteArticlebyId: articleId => {
+    return new Promise((resolve, reject) => {
+      return db
+        .none(deleteArticleQuery, [articleId])
+        .then(() => {
+          resolve();
         })
         .catch(err => {
           console.log(err);
