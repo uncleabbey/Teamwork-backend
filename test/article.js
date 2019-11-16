@@ -90,10 +90,25 @@ describe('Create Article', () => {
         done();
       });
   });
+  it('Valid user should get error when viewing  non existing article', done => {
+    chai
+      .request(app)
+      .get('/api/v1/articles/1000')
+      .set('authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        const { error, status } = res.body;
+        expect(status).to.be.equal('error');
+        expect(error).to.be.equal(
+          'Article not found in the database'
+        );
+        done();
+      });
+  });
   it('invalid token should not be able to view article...', done => {
     chai
       .request(app)
-      .get('/api/v1/articles/2')
+      .get('/api/v1/articles/1')
       .set('authorization', `Bearer ${invalidToken}`)
       .end((err, res) => {
         expect(res).to.have.status(500);
@@ -111,7 +126,7 @@ describe('Create Article', () => {
     };
     chai
       .request(app)
-      .patch('/api/v1/articles/2')
+      .patch('/api/v1/articles/4')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${token}`)
       .send(articleBody)
@@ -134,10 +149,37 @@ describe('Create Article', () => {
     };
     chai
       .request(app)
-      .post(url)
+      .patch('/api/v1/articles/4')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${invalidToken}`)
       .send(articleBody)
+      .end((err, res) => {
+        expect(res).to.have.status(500);
+        const { error, status } = res.body;
+        expect(status).to.be.equal('error');
+        expect(error).to.be.equal('Invalid Request!1');
+        done();
+      });
+  });
+  it('Valid user should delete article by id', done => {
+    chai
+      .request(app)
+      .delete('/api/v1/articles/3')
+      .set('authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        const { data, status } = res.body;
+        expect(status).to.equal('success');
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('message');
+        done();
+      });
+  });
+  it('Invalid user should not delete article', done => {
+    chai
+      .request(app)
+      .delete('/api/v1/articles/3')
+      .set('authorization', `Bearer ${invalidToken}`)
       .end((err, res) => {
         expect(res).to.have.status(500);
         const { error, status } = res.body;

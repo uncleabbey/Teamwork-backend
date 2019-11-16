@@ -12,7 +12,7 @@ const createArticles = (title, article, userId) => {
       .catch(error => {
         console.log(error);
         if (error instanceof errors.QueryResultError) {
-          return reject(new Error('User not found'));
+          return reject(new Error('User not found in the database'));
         }
         return reject(error);
       });
@@ -27,7 +27,9 @@ const getOneArticle = articleId => {
       .catch(error => {
         console.log(error);
         if (error instanceof errors.QueryResultError) {
-          return reject(new Error('User not found'));
+          return reject(
+            new Error('Article not found in the database')
+          );
         }
         return reject(error);
       });
@@ -41,10 +43,33 @@ const updateArticle = (title, article, articleId) => {
       .catch(error => {
         console.log(error);
         if (error instanceof errors.QueryResultError) {
-          return reject(new Error('User not found'));
+          return reject(
+            new Error('Article not found in the database')
+          );
         }
         return reject(error);
       });
   });
 };
-export default { createArticles, getOneArticle, updateArticle };
+const deleteArticle = articleId => {
+  return new Promise((resolve, reject) => {
+    articleModel
+      .deleteArticlebyId(articleId)
+      .then(() => resolve())
+      .catch(error => {
+        console.log(error);
+        if (error instanceof errors.QueryResultError) {
+          return reject(
+            new Error('Article not found in the database')
+          );
+        }
+        return reject(error);
+      });
+  });
+};
+export default {
+  createArticles,
+  getOneArticle,
+  updateArticle,
+  deleteArticle
+};
