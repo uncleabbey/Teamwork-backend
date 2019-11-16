@@ -1,0 +1,22 @@
+[
+  {
+    "comment": "Lorem dolor",
+    "authorId": 2,
+    "articleId": 1
+  },
+  {
+    "comment": "lorem ipsum",
+    "authorId": 4,
+    "articleId": 2
+  },
+  {
+    "comment": "Can't beleive it",
+    "authorId": 1,
+    "articleId": 3
+  },
+  {
+    "comment": "Yeah Yeah",
+    "authorId": 3,
+    "articleId": 3
+  }
+]
