@@ -87,6 +87,7 @@ describe('Create Article', () => {
         expect(data).to.have.property('id');
         expect(data).to.have.property('title');
         expect(data).to.have.property('article');
+        expect(data).to.have.property('comments');
         done();
       });
   });

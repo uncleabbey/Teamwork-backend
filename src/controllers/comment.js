@@ -1,5 +1,7 @@
-import createArtComments from '../services/articleComments';
+import comments from '../services/articleComments';
 import service from '../services/article';
+
+const { createArtComments } = comments;
 
 const { getOneArticle } = service;
 const createArticleComment = async (req, res) => {
