@@ -20,7 +20,7 @@ export const verifyToken = async (req, res, next) => {
     return next();
   } catch (error) {
     return res.status(500).json({
-      status: 'Error',
+      status: 'error',
       error: 'Invalid Request!1'
     });
   }
@@ -33,12 +33,12 @@ export const checkAdmin = (req, res, next) => {
       return next();
     }
     return res.status(401).json({
-      status: 'Error',
+      status: 'error',
       error: 'Sorry Only Admin can perform this action'
     });
   } catch (error) {
     return res.status(500).json({
-      status: 'Error',
+      status: 'error',
       error: 'Invalid Request!2'
     });
   }

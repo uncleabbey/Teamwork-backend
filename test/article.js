@@ -67,6 +67,39 @@ describe('Create Article', () => {
       .send(articleBody)
       .end((err, res) => {
         expect(res).to.have.status(500);
+        const { error, status } = res.body;
+        expect(status).to.be.equal('error');
+        expect(error).to.be.equal('Invalid Request!1');
+        done();
+      });
+  });
+  it('Admin and employee should view one article', done => {
+    chai
+      .request(app)
+      .get('/api/v1/articles/2')
+      .set('authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        const { data, status } = res.body;
+        expect(status).to.equal('success');
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('message');
+        expect(data).to.have.property('id');
+        expect(data).to.have.property('title');
+        expect(data).to.have.property('article');
+        done();
+      });
+  });
+  it('invalid token should not be able to view article...', done => {
+    chai
+      .request(app)
+      .get('/api/v1/articles/2')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(500);
+        const { error, status } = res.body;
+        expect(status).to.be.equal('error');
+        expect(error).to.be.equal('Invalid Request!1');
         done();
       });
   });

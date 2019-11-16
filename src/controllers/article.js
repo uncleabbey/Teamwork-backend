@@ -1,9 +1,10 @@
-import articleService from '../services/article';
+import articles from '../services/article';
 
+const { createArticles, getOneArticle } = articles;
 const createArticle = (req, res) => {
   const { userId } = req.decoded;
   const { title, article } = req.body;
-  articleService(title, article, userId)
+  createArticles(title, article, userId)
     .then(data => {
       res.status(201).json({
         status: 'success',
@@ -24,4 +25,18 @@ const createArticle = (req, res) => {
     });
 };
 
-export default createArticle;
+const getArticlebyId = (req, res) => {
+  const { id } = req.params;
+  getOneArticle(id).then(data => {
+    res.status(200).json({
+      status: 'success',
+      data: {
+        message: 'Article successfully retrieved',
+        id: data.articleid,
+        title: data.title,
+        article: data.article
+      }
+    });
+  });
+};
+export default { createArticle, getArticlebyId };
