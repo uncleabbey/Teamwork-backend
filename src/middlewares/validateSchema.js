@@ -1,6 +1,7 @@
 import Schema from '../utils/validators/userSchema';
 import articleSchema from '../utils/validators/articleSchema';
 import commentSch from '../utils/validators/commentSchema';
+import gifSchema from '../utils/validators/gifSchema';
 
 const { userSchema, signUpSchema } = Schema;
 const signInValidator = (req, res, next) => {
@@ -61,9 +62,24 @@ const commentValidator = (req, res, next) => {
   }
   return next();
 };
+const gifValidator = (req, res, next) => {
+  const { error } = gifSchema.validate(req.body, {
+    allowUnknown: true,
+    stripUnknown: true,
+    abortEarly: false
+  });
+  if (error) {
+    return res.status(400).json({
+      status: 'Error',
+      error: error.details[0].message
+    });
+  }
+  return next();
+};
 export default {
   signInValidator,
   createUserValidator,
   articleValidator,
-  commentValidator
+  commentValidator,
+  gifValidator
 };
