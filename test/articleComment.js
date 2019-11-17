@@ -6,7 +6,7 @@ import {
   invalidUser
 } from './helper/testHelper';
 
-const url = '/api/v1/articles/5/comment';
+const url = '/api/v1/articles/1/comment';
 let token;
 let invalidToken;
 
@@ -51,7 +51,7 @@ describe('Article Comments', () => {
         done();
       });
   });
-  it('valid user should comment on articles', done => {
+  it('invalid user should comment on articles', done => {
     const commentBody = {
       comment: 'Marlians, Marlians, Marlians'
     };

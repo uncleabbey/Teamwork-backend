@@ -74,5 +74,34 @@ describe('Gifs Endpoint', () => {
           done();
         });
     });
+    describe('Delete Gifs', () => {
+      it('Valid user should delete Gifs', done => {
+        chai
+          .request(app)
+          .delete('/api/v1/gifs/1')
+          .set('authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            const { data, status } = res.body;
+            expect(status).to.equal('success');
+            expect(data).to.be.an('object');
+            expect(data).to.have.property('message');
+            done();
+          });
+      });
+      it('Invalid user should not delete Gifs', done => {
+        chai
+          .request(app)
+          .delete('/api/v1/gifs/2')
+          .set('authorization', `Bearer ${invalidToken}`)
+          .end((err, res) => {
+            expect(res).to.have.status(500);
+            const { error, status } = res.body;
+            expect(status).to.be.equal('error');
+            expect(error).to.be.equal('Invalid Request!1');
+            done();
+          });
+      });
+    });
   });
 });

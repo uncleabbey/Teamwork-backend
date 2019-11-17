@@ -9,7 +9,9 @@ RETURNING gif_Id AS gifId, title, img_url AS imageUrl, user_id AS userId, create
 const getGifbyIdQuery = `
 SELECT * from gifs WHERE gif_Id = $1;
 `;
-
+const deleteGifQuery = `
+DELETE FROM gifs  WHERE gif_id = $1;
+`;
 export default {
   seedGifs: (title, imgUrl, userId) => {
     return new Promise((resolve, reject) => {
@@ -32,6 +34,19 @@ export default {
         .then(res => {
           console.log(res);
           resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  },
+  deleteGifbyId: gifId => {
+    return new Promise((resolve, reject) => {
+      return db
+        .none(deleteGifQuery, [gifId])
+        .then(() => {
+          resolve();
         })
         .catch(err => {
           console.log(err);

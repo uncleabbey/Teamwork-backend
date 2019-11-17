@@ -6,7 +6,7 @@ import validators from '../../middlewares/validateSchema';
 import extractUrl from '../../middlewares/extractUrl';
 
 const { gifValidator } = validators;
-const { gifsCtrl, getGifById } = ctrl;
+const { gifsCtrl, getGifById, deleteGifbyId } = ctrl;
 
 const router = Router();
 
@@ -19,4 +19,5 @@ router.post(
   gifsCtrl
 );
 router.get('/gifs/:gifId', verifyToken, getGifById);
+router.delete('/gifs/:gifId', verifyToken, deleteGifbyId);
 export default router;

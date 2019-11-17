@@ -2,8 +2,8 @@ import services from '../services/gifs';
 import comments from '../services/gifComments';
 
 const { getGifComments } = comments;
+const { createGifs, getGif, deleteGif } = services;
 
-const { createGifs, getGif } = services;
 const gifsCtrl = async (req, res) => {
   const { url } = req.file;
   const { title } = req.body;
@@ -61,4 +61,22 @@ const getGifById = async (req, res) => {
     });
   }
 };
-export default { gifsCtrl, getGifById };
+const deleteGifbyId = (req, res) => {
+  const { gifId } = req.params;
+  deleteGif(gifId)
+    .then(() => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          message: 'gif post successfully deleted'
+        }
+      });
+    })
+    .catch(error => {
+      res.status(400).json({
+        status: 'error',
+        error: error.message
+      });
+    });
+};
+export default { gifsCtrl, getGifById, deleteGifbyId };
