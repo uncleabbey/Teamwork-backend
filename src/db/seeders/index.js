@@ -9,8 +9,8 @@ const seeders = async () => {
     console.log('hello');
     await user.seed();
     await article.seed();
-    await comment.seed();
     await gif.seed();
+    await comment.seed();
   } catch (error) {
     console.log(error);
   }
