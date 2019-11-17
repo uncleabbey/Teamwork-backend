@@ -9,6 +9,7 @@ RETURNING gif_Id AS gifId, title, img_url AS imageUrl, user_id AS userId, create
 const getGifbyIdQuery = `
 SELECT * from gifs WHERE gif_Id = $1;
 `;
+
 export default {
   seedGifs: (title, imgUrl, userId) => {
     return new Promise((resolve, reject) => {

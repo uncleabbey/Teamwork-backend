@@ -44,6 +44,7 @@ describe('Gifs Endpoint', () => {
           expect(data).to.have.property('createdOn');
           expect(data).to.have.property('title');
           expect(data).to.have.property('url');
+          expect(data).to.have.property('comments');
           done();
         });
     });

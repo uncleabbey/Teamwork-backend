@@ -1,4 +1,7 @@
 import services from '../services/gifs';
+import comments from '../services/gifComments';
+
+const { getGifComments } = comments;
 
 const { createGifs, getGif } = services;
 const gifsCtrl = async (req, res) => {
@@ -29,6 +32,7 @@ const getGifById = async (req, res) => {
   const { gifId } = req.params;
   try {
     const data = await getGif(gifId);
+    const allComments = await getGifComments(gifId);
     return res.status(200).json({
       status: 'success',
       data: {
@@ -36,7 +40,18 @@ const getGifById = async (req, res) => {
         id: data.gif_id,
         createdOn: data.created_on,
         title: data.title,
-        url: data.img_url
+        url: data.img_url,
+        comments: allComments.map(
+          ({
+            comment_id: commentId,
+            author_id: authorId,
+            comment
+          }) => ({
+            commentId,
+            authorId,
+            comment
+          })
+        )
       }
     });
   } catch (error) {
