@@ -18,5 +18,24 @@ const createGifComments = (gifId, authorId, comment) => {
       });
   });
 };
+const getGifComments = gifId => {
+  return new Promise((resolve, reject) => {
+    comments
+      .getCommentbyAId(gifId)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+        if (error instanceof errors.QueryResultError) {
+          return reject(
+            new Error('Article not found in the database')
+          );
+        }
+        return reject(error);
+      });
+  });
+};
 
-export default createGifComments;
+export default { createGifComments, getGifComments };
