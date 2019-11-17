@@ -1,4 +1,4 @@
-import { chai, app, expect } from './testHelper';
+import { chai, app, expect } from './helper/testHelper';
 
 describe('Testing User Login Endpoint', () => {
   it('Admin/Employee should log in', async () => {
