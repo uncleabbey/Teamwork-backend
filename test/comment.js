@@ -4,7 +4,7 @@ import {
   expect,
   generateToken,
   invalidUser
-} from './testHelper';
+} from './helper/testHelper';
 
 const url = '/api/v1/articles/5/comment';
 let token;

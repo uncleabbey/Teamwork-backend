@@ -1,4 +1,4 @@
-import { chai, app, expect } from './testHelper';
+import { chai, app, expect } from './helper/testHelper';
 
 describe('index js', () => {
   it('should display welcome message succesfully', done => {

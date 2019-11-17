@@ -1,5 +1,6 @@
-import createGifs from '../services/gifs';
+import services from '../services/gifs';
 
+const { createGifs, getGif } = services;
 const gifsCtrl = async (req, res) => {
   const { url } = req.file;
   const { title } = req.body;
@@ -24,5 +25,25 @@ const gifsCtrl = async (req, res) => {
     });
   }
 };
-
-export default gifsCtrl;
+const getGifById = async (req, res) => {
+  const { gifId } = req.params;
+  try {
+    const data = await getGif(gifId);
+    return res.status(200).json({
+      status: 'success',
+      data: {
+        message: 'GIF image succesfully retrieved',
+        id: data.gif_id,
+        createdOn: data.created_on,
+        title: data.title,
+        url: data.img_url
+      }
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: 'error',
+      error: error.message
+    });
+  }
+};
+export default { gifsCtrl, getGifById };

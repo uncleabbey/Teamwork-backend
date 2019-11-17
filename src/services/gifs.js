@@ -20,5 +20,19 @@ const createGifs = (title, imgUrl, userId) => {
       });
   });
 };
+const getGif = gifId => {
+  return new Promise((resolve, reject) => {
+    gifModel
+      .getGifById(gifId)
+      .then(res => resolve(res))
+      .catch(error => {
+        console.log(error);
+        if (error instanceof errors.QueryResultError) {
+          return reject(new Error('Gif not found in the database'));
+        }
+        return reject(error);
+      });
+  });
+};
 
-export default createGifs;
+export default { createGifs, getGif };
