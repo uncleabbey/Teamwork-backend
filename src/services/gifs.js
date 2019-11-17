@@ -34,5 +34,19 @@ const getGif = gifId => {
       });
   });
 };
+const deleteGif = gifId => {
+  return new Promise((resolve, reject) => {
+    gifModel
+      .deleteGifbyId(gifId)
+      .then(() => resolve())
+      .catch(error => {
+        console.log(error);
+        if (error instanceof errors.QueryResultError) {
+          return reject(new Error('gif not found in the database'));
+        }
+        return reject(error);
+      });
+  });
+};
 
-export default { createGifs, getGif };
+export default { createGifs, getGif, deleteGif };

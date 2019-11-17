@@ -28,7 +28,7 @@ before(async () => {
 });
 
 describe('Article Comments', () => {
-  it('valid user should comment on articles', done => {
+  it('valid user should comment on gifs', done => {
     const commentBody = {
       comment: 'Marlians, Marlians, Marlians'
     };
@@ -50,7 +50,7 @@ describe('Article Comments', () => {
         done();
       });
   });
-  it('valid user should comment on articles', done => {
+  it('valid user should comment on gifs', done => {
     const commentBody = {
       comment: 'Marlians, Marlians, Marlians'
     };
