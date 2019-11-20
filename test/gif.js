@@ -29,7 +29,7 @@ before(async () => {
 
 describe('Gifs Endpoint', () => {
   describe('Get Gifs', () => {
-    it('should behave...', done => {
+    it('should behave get gifs by id ...', done => {
       chai
         .request(app)
         .get(url)
