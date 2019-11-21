@@ -2,10 +2,10 @@
 import { errors } from 'pg-promise';
 import articleModel from '../db/models/article';
 
-const createArticles = (title, article, userId) => {
+const createArticles = (title, article, userId, tags) => {
   return new Promise((resolve, reject) => {
     articleModel
-      .seedArticles(title, article, userId)
+      .seedArticles(title, article, userId, tags)
       .then(res => {
         resolve(res);
       })
@@ -35,13 +35,13 @@ const getOneArticle = articleId => {
       });
   });
 };
-const updateArticle = (title, article, articleId) => {
+const updateArticle = (title, article, tags, articleId) => {
   return new Promise((resolve, reject) => {
     articleModel
-      .updateArticlebyId(title, article, articleId)
+      .updateArticlebyId(title, article, tags, articleId)
       .then(res => resolve(res))
       .catch(error => {
-        console.log(error);
+        console.log('Service', error);
         if (error instanceof errors.QueryResultError) {
           return reject(
             new Error('Article not found in the database')
