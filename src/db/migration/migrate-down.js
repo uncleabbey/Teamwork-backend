@@ -4,6 +4,7 @@ import article from './create-article';
 import comment from './create-comment';
 import gif from './create-gif';
 import gifComment from './gif-comments';
+import flag from './flaggedTable';
 
 const migrateDown = async () => {
   try {
@@ -12,7 +13,7 @@ const migrateDown = async () => {
     await comment.down();
     await gif.down();
     await gifComment.down();
-    console.log('Succesfully Dropped Table');
+    await flag.down();
   } catch (error) {
     console.log(error);
   }
