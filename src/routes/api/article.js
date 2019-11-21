@@ -8,7 +8,8 @@ const {
   createArticle,
   getArticlebyId,
   updateArticlebyId,
-  deleteArticlebyId
+  deleteArticlebyId,
+  searchArticleByTags
 } = articles;
 
 const router = Router();
@@ -25,6 +26,6 @@ router.patch(
   articleValidator,
   updateArticlebyId
 );
-
 router.delete('/articles/:articleId', verifyToken, deleteArticlebyId);
+router.get('/search', verifyToken, searchArticleByTags);
 export default router;

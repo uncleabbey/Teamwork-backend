@@ -90,5 +90,11 @@ export default {
           reject(err);
         });
     });
+  },
+  searchByTags: tags => {
+    const searchQuery = `
+      SELECT * FROM articles WHERE $1 = any(tags);
+    `;
+    return db.manyOrNone(searchQuery, [tags]);
   }
 };
