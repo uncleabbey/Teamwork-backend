@@ -9,7 +9,8 @@ export default {
       title VARCHAR(255) NOT NULL,
       article TEXT NOT NULL,
       created_on timestamptz NOT NULL DEFAULT now(),
-      user_id INTEGER NOT NULL REFERENCES users(Id)
+      user_id INTEGER NOT NULL REFERENCES users(Id),
+      tags TEXT []
     );
   `;
     return new Promise((resolve, reject) => {

@@ -2,9 +2,9 @@
 import db from '../query/db';
 
 const query = `
-INSERT INTO articles (title, article, user_id)
-VALUES ($1, $2, $3)
-RETURNING article_id AS articleId, title, article, user_id, created_on;
+INSERT INTO articles (title, article, user_id, tags)
+VALUES ($1, $2, $3, $4)
+RETURNING article_id AS articleId, title, article, user_id, tags, created_on;
 `;
 const oneArticlesQuery = `
 SELECT u.first_name AS firstName, u.last_name AS lastName, a.article_id AS articleId, 
@@ -20,8 +20,8 @@ WHERE article_id = $1;
 `;
 
 const updateArticleQuery = `
-UPDATE articles SET title=$1, article=$2 
-WHERE article_id=$3
+UPDATE articles SET title=$1, article=$2, tags=$3 
+WHERE article_id=$4
 RETURNING title, article;
 `;
 const deleteArticleQuery = `
@@ -29,10 +29,10 @@ DELETE FROM articles  WHERE article_id = $1;
 `;
 
 export default {
-  seedArticles: (title, article, userId) => {
+  seedArticles: (title, article, userId, tags) => {
     return new Promise((resolve, reject) => {
       return db
-        .one(query, [title, article, userId])
+        .one(query, [title, article, userId, tags.map(tag => tag)])
         .then(res => {
           console.log(res);
           resolve(res);
@@ -49,27 +49,21 @@ export default {
         .one(oneArticlesQuery, [articleId])
         .then(res => {
           console.log(res);
-          resolve(res);
+          return resolve(res);
         })
         .catch(err => {
           console.log(err);
-          reject(err);
+          return reject(err);
         });
     });
   },
-  updateArticlebyId: (title, article, articleId) => {
-    return new Promise((resolve, reject) => {
-      return db
-        .one(updateArticleQuery, [title, article, articleId])
-        .then(res => {
-          console.log(res);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          reject(err);
-        });
-    });
+  updateArticlebyId: (title, article, tags, articleId) => {
+    return db.one(updateArticleQuery, [
+      title,
+      article,
+      tags,
+      articleId
+    ]);
   },
   deleteArticlebyId: articleId => {
     return new Promise((resolve, reject) => {

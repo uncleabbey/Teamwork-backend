@@ -10,8 +10,9 @@ const {
 } = articles;
 const createArticle = (req, res) => {
   const { userId } = req.decoded;
-  const { title, article } = req.body;
-  createArticles(title, article, userId)
+  const { title, article, tags } = req.body;
+  const tag = tags.split(' ');
+  createArticles(title, article, userId, tag)
     .then(data => {
       res.status(201).json({
         status: 'success',
@@ -66,25 +67,25 @@ const getArticlebyId = async (req, res) => {
 };
 const updateArticlebyId = (req, res) => {
   const { articleId } = req.params;
-  const { title, article } = req.body;
-  updateArticle(title, article, articleId).then(data => {
-    res
-      .status(201)
-      .json({
+  const { title, article, tags } = req.body;
+  const tag = tags.split(' ');
+  updateArticle(title, article, tag, articleId)
+    .then(data => {
+      return res.status(201).json({
         status: 'success',
         data: {
           message: 'Article Successfully Updated',
           title: data.title,
           article: data.article
         }
-      })
-      .catch(error => {
-        res.status(400).json({
-          status: 'error',
-          error: error.message
-        });
       });
-  });
+    })
+    .catch(error => {
+      return res.status(400).json({
+        status: 'error',
+        error
+      });
+    });
 };
 const deleteArticlebyId = (req, res) => {
   const { articleId } = req.params;
