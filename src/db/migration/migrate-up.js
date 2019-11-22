@@ -4,6 +4,7 @@ import article from './create-article';
 import comment from './create-comment';
 import gif from './create-gif';
 import gifComment from './gif-comments';
+import flag from './flaggedTable';
 
 const migrateUp = async () => {
   try {
@@ -12,6 +13,7 @@ const migrateUp = async () => {
     await comment.up();
     await gif.up();
     await gifComment.up();
+    await flag.up();
   } catch (error) {
     console.log(error);
   }
