@@ -6,7 +6,7 @@ import {
   invalidUser
 } from './helper/testHelper';
 
-const url = '/api/v1/feed';
+const url = '/api/v1/feed?currentPage=1&pageSize=10';
 let token;
 let invalidToken;
 
