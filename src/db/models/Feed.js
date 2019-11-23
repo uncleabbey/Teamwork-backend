@@ -6,13 +6,15 @@ FROM gifs
 UNION ALL
 SELECT user_id AS authorId, article_id AS id, created_on, title, article  AS content
 FROM articles
-ORDER BY created_on DESC;
+ORDER BY created_on DESC
+Limit $1 offset $2
+;
 `;
 
-const feed = () => {
+const feed = (limit, offset) => {
   return new Promise((resolve, reject) => {
     return db
-      .manyOrNone(query)
+      .manyOrNone(query, [limit, offset])
       .then(res => {
         return resolve(res);
       })
