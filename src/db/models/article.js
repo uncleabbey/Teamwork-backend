@@ -2,8 +2,8 @@
 import db from '../query/db';
 
 const query = `
-INSERT INTO articles (title, article, user_id, tags)
-VALUES ($1, $2, $3, $4)
+INSERT INTO articles (title, article, user_id, tags, type)
+VALUES ($1, $2, $3, $4, $5)
 RETURNING article_id AS articleId, title, article, user_id, tags, created_on;
 `;
 const oneArticlesQuery = `
@@ -20,7 +20,7 @@ WHERE article_id = $1;
 `;
 
 const updateArticleQuery = `
-UPDATE articles SET title=$1, article=$2, tags=$3 
+UPDATE articles SET title=$1, article=$2, tags=$3
 WHERE article_id=$4
 RETURNING title, article;
 `;
@@ -29,10 +29,16 @@ DELETE FROM articles  WHERE article_id = $1;
 `;
 
 export default {
-  seedArticles: (title, article, userId, tags) => {
+  seedArticles: (title, article, userId, tags, type) => {
     return new Promise((resolve, reject) => {
       return db
-        .one(query, [title, article, userId, tags.map(tag => tag)])
+        .one(query, [
+          title,
+          article,
+          userId,
+          tags.map(tag => tag),
+          type
+        ])
         .then(res => {
           console.log(res);
           resolve(res);

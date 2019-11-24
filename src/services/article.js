@@ -2,10 +2,10 @@
 import { errors } from 'pg-promise';
 import articleModel from '../db/models/article';
 
-const createArticles = (title, article, userId, tags) => {
+const createArticles = (title, article, userId, tags, type) => {
   return new Promise((resolve, reject) => {
     articleModel
-      .seedArticles(title, article, userId, tags)
+      .seedArticles(title, article, userId, tags, type)
       .then(res => {
         resolve(res);
       })

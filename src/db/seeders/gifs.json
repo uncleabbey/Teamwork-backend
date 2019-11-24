@@ -2,16 +2,19 @@
   {
     "title": "Funny",
     "imgUrl": "https://res.cloudinary.com/kayode/image/upload/v1573153624/2.gif.pagespeed.ce.K68b7JMxT3_v6u6zd.gif",
-    "userId": 2
+    "userId": 2,
+    "type": "gif"
   },
   {
     "title": "This Guy",
     "imgUrl": "https://res.cloudinary.com/kayode/image/upload/v1573153624/2.gif.pagespeed.ce.K68b7JMxT3_v6u6zd.gif",
-    "userId": 1
+    "userId": 1,
+    "type": "gif"
   },
   {
     "title": "Got me rolling on the floor like",
     "imgUrl": "https://res.cloudinary.com/kayode/image/upload/v1573153624/2.gif.pagespeed.ce.K68b7JMxT3_v6u6zd.gif",
-    "userId": 3
+    "userId": 3,
+    "type": "gif"
   }
 ]

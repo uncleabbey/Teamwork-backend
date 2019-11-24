@@ -9,7 +9,8 @@ export default {
         title VARCHAR(255) NOT NULL,
         img_url VARCHAR NOT NULL,
         created_on timestamptz NOT NULL DEFAULT now(),
-        user_id INTEGER NOT NULL REFERENCES users(Id)
+        user_id INTEGER NOT NULL REFERENCES users(Id),
+        type type NOT NULL
       );
     `;
     return new Promise((resolve, reject) => {
@@ -26,7 +27,9 @@ export default {
     });
   },
   down: () => {
-    const query = `DROP TABLE IF EXISTS gifs CASCADE;`;
+    const query = `
+    DROP TABLE IF EXISTS gifs CASCADE;
+    `;
     return new Promise((resolve, reject) => {
       return db
         .none(query)

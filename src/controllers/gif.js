@@ -8,8 +8,9 @@ const gifsCtrl = async (req, res) => {
   const { url } = req.file;
   const { title } = req.body;
   const { userId } = req.decoded;
+  const type = 'gif';
   try {
-    const data = await createGifs(title, url, userId);
+    const data = await createGifs(title, url, userId, type);
     return res.status(201).json({
       status: 'success',
       data: {

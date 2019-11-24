@@ -13,7 +13,8 @@ const createArticle = (req, res) => {
   const { userId } = req.decoded;
   const { title, article, tags } = req.body;
   const tag = tags.split(' ');
-  createArticles(title, article, userId, tag)
+  const type = 'article';
+  createArticles(title, article, userId, tag, type)
     .then(data => {
       res.status(201).json({
         status: 'success',

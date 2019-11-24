@@ -2,8 +2,8 @@
 import db from '../query/db';
 
 const query = `
-INSERT INTO gifs (title, img_url, user_id)
-VALUES ($1, $2, $3)
+INSERT INTO gifs (title, img_url, user_id, type)
+VALUES ($1, $2, $3, $4)
 RETURNING gif_Id AS gifId, title, img_url AS imageUrl, user_id AS userId, created_on;
 `;
 const getGifbyIdQuery = `
@@ -13,10 +13,10 @@ const deleteGifQuery = `
 DELETE FROM gifs  WHERE gif_id = $1;
 `;
 export default {
-  seedGifs: (title, imgUrl, userId) => {
+  seedGifs: (title, imgUrl, userId, type) => {
     return new Promise((resolve, reject) => {
       return db
-        .one(query, [title, imgUrl, userId])
+        .one(query, [title, imgUrl, userId, type])
         .then(res => {
           console.log(res);
           resolve(res);
