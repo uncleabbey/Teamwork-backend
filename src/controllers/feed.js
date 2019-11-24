@@ -17,12 +17,22 @@ const feedCtrl = async (req, res) => {
       status: 'success',
       data: rows.map(
         ({
+          feed_id: feedID,
           id,
+          type,
           created_on: createdOn,
           title,
           content,
           authorid: authorId
-        }) => ({ id, createdOn, title, content, authorId })
+        }) => ({
+          feedID: Number(feedID),
+          id,
+          createdOn,
+          title,
+          content,
+          authorId,
+          type
+        })
       ),
       meta
     });

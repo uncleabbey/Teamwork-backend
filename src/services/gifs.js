@@ -2,10 +2,10 @@
 import { errors } from 'pg-promise';
 import gifModel from '../db/models/gif';
 
-const createGifs = (title, imgUrl, userId) => {
+const createGifs = (title, imgUrl, userId, type) => {
   return new Promise((resolve, reject) => {
     gifModel
-      .seedGifs(title, imgUrl, userId)
+      .seedGifs(title, imgUrl, userId, type)
       .then(res => {
         resolve(res);
       })

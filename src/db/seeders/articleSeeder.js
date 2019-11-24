@@ -5,8 +5,8 @@ export default {
   seed: async () => {
     try {
       await Promise.all(
-        articlesJson.map(({ title, article, userId, tag }) =>
-          articles.seedArticles(title, article, userId, tag)
+        articlesJson.map(({ title, article, userId, tag, type }) =>
+          articles.seedArticles(title, article, userId, tag, type)
         )
       );
     } catch (error) {
