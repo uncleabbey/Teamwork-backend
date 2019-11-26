@@ -1,6 +1,8 @@
 import { calculateLimitAndOffset, paginate } from 'paginate-info';
 import models from '../db/models/Feed';
 
+const { feed, countFeed } = models;
+
 const feedCtrl = async (req, res) => {
   const {
     query: { currentPage, pageSize }
@@ -10,8 +12,9 @@ const feedCtrl = async (req, res) => {
       currentPage,
       pageSize
     );
-    const rows = await models(limit, offset);
-    const count = rows.length;
+    const rows = await feed(limit, offset);
+    const feedCount = await countFeed();
+    const count = Number(feedCount.count);
     const meta = paginate(currentPage, count, rows, pageSize);
     return res.status(200).json({
       status: 'success',
@@ -23,7 +26,9 @@ const feedCtrl = async (req, res) => {
           created_on: createdOn,
           title,
           content,
-          authorid: authorId
+          authorid: authorId,
+          firstname: firstName,
+          lastname: lastName
         }) => ({
           feedID: Number(feedID),
           id,
@@ -31,7 +36,9 @@ const feedCtrl = async (req, res) => {
           title,
           content,
           authorId,
-          type
+          type,
+          firstName,
+          lastName
         })
       ),
       meta

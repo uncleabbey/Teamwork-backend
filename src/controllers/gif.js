@@ -46,11 +46,17 @@ const getGifById = async (req, res) => {
           ({
             comment_id: commentId,
             author_id: authorId,
-            comment
+            comment,
+            first_name: firstName,
+            last_name: lastName,
+            created_on: createdOn
           }) => ({
             commentId,
             authorId,
-            comment
+            comment,
+            firstName,
+            lastName,
+            createdOn
           })
         )
       }

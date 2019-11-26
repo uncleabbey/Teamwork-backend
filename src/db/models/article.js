@@ -8,14 +8,15 @@ RETURNING article_id AS articleId, title, article, user_id, tags, created_on;
 `;
 const oneArticlesQuery = `
 SELECT u.first_name AS firstName, u.last_name AS lastName, a.article_id AS articleId, 
-a.title, a.article, a.created_on AS createdOn
+a.title, a.article, a.created_on AS createdOn, a.tags
 from articles a 
 inner join users u ON a.user_id = u.id
 where a.article_id = $1;
 `;
 const getArtCommentQuery = `
-SELECT comment_id, comment, author_id
-FROM article_comments
+SELECT a.comment_id, a.comment, a.author_id, u.first_name, u.last_name, a.created_on
+FROM article_comments a
+JOIN users u on a.author_id = u.id
 WHERE article_id = $1;
 `;
 

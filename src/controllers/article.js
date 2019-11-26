@@ -12,9 +12,8 @@ const {
 const createArticle = (req, res) => {
   const { userId } = req.decoded;
   const { title, article, tags } = req.body;
-  const tag = tags.split(' ');
   const type = 'article';
-  createArticles(title, article, userId, tag, type)
+  createArticles(title, article, userId, tags, type)
     .then(data => {
       res.status(201).json({
         status: 'success',
@@ -47,15 +46,22 @@ const getArticlebyId = async (req, res) => {
         id: data.articleid,
         title: data.title,
         article: data.article,
+        tags: data.tags,
         comments: allComments.map(
           ({
             comment_id: commentId,
             comment,
-            author_id: authorId
+            author_id: authorId,
+            first_name: firstName,
+            last_name: lastName,
+            created_on: createdOn
           }) => ({
             commentId,
             comment,
-            authorId
+            authorId,
+            firstName,
+            lastName,
+            createdOn
           })
         )
       }
@@ -70,8 +76,7 @@ const getArticlebyId = async (req, res) => {
 const updateArticlebyId = (req, res) => {
   const { articleId } = req.params;
   const { title, article, tags } = req.body;
-  const tag = tags.split(' ');
-  updateArticle(title, article, tag, articleId)
+  updateArticle(title, article, tags, articleId)
     .then(data => {
       return res.status(201).json({
         status: 'success',

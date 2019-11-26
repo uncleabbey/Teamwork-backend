@@ -7,8 +7,9 @@ VALUES ($1, $2, $3)
 RETURNING comment_Id, comment, created_on, gif_Id, author_Id
 `;
 const getGifCommentQuery = `
-SELECT comment_id, comment, author_id
-FROM gif_comments
+SELECT g.comment_id, g.comment, g.author_id, u.first_name, u.last_name, g.created_on
+FROM gif_comments g
+JOIN users u on g.author_id = u.id
 WHERE gif_Id = $1;
 `;
 export default {

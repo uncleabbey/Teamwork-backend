@@ -33,7 +33,7 @@ describe('Create Article', () => {
       title: 'Yellow Fever',
       article:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus unde itaque mollitia, soluta sit voluptate omnis beatae placeat veniam assumenda amet voluptas, nihil eos obcaecati in iusto! Fugit, deleniti ut.',
-      tags: 'gsf kkk babab'
+      tags: ["gsf", "kkk", "babab"]
     };
     chai
       .request(app)
@@ -59,7 +59,7 @@ describe('Create Article', () => {
       title: 'Yellow Fever',
       article:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus unde itaque mollitia, soluta sit voluptate omnis beatae placeat veniam assumenda amet voluptas, nihil eos obcaecati in iusto! Fugit, deleniti ut.',
-      tags: 'gsf kkk babab'
+       tags: ["gsf", "kkk", "babab"]
     };
     chai
       .request(app)
@@ -126,7 +126,7 @@ describe('Create Article', () => {
       title: 'Yellow Fever by Fela',
       article:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit..',
-      tags: 'gsf kkk babab'
+       tags: ["gsf", "kkk", "babab"]
     };
     chai
       .request(app)
@@ -150,7 +150,7 @@ describe('Create Article', () => {
       title: 'Yellow Fever by Fela',
       article:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit..',
-      tags: 'gsf kkk babab'
+     tags: ["gsf", "kkk", "babab"]
     };
     chai
       .request(app)
