@@ -27,5 +27,5 @@ router.patch(
   updateArticlebyId
 );
 router.delete('/articles/:articleId', verifyToken, deleteArticlebyId);
-router.get('/search', verifyToken, searchArticleByTags);
+router.post('/search', verifyToken, searchArticleByTags);
 export default router;
