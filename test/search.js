@@ -33,7 +33,7 @@ describe('Search', () => {
     };
     chai
       .request(app)
-      .get(url)
+      .post(url)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${token}`)
       .send(tagsBody)
@@ -54,7 +54,7 @@ describe('Search', () => {
     };
     chai
       .request(app)
-      .get(url)
+      .post(url)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${invalidToken}`)
       .send(tagsBody)
@@ -72,7 +72,7 @@ describe('Search', () => {
     };
     chai
       .request(app)
-      .get(url)
+      .post(url)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${token}`)
       .send(tagsBody)
