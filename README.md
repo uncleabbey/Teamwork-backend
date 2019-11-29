@@ -6,9 +6,9 @@
 ## Workable endpoints
 ### Base Url 
 https://abbey-teamwork-backend.herokuapp.com/api/v1
-Please not that every endpoint apart from user login (/auth/signin) requires a token which can be gotten from login is passed into the request. Login response example
-  
-headers as
+Please not that every endpoint apart from user login (/auth/signin) requires a token which can be gotten from login is passed into the request. 
+
+Login response example headers as
   ``` 
   headers { 
    'authorization', `Bearer ${token}`
@@ -60,6 +60,19 @@ headers as
    }
   }
   ```
+  success response 
+  ```
+  {
+  "message": "Succesfully Created in User",
+  "status": "success",
+  "data": {
+    "message": "User account successfully created",
+    "userId": INT,
+    "isAdmin": BOOLEAN,
+    "token": STRING
+  }
+}
+  ```
 #### Articles
 - Create Article: POST /articles
   req example 
@@ -74,9 +87,21 @@ headers as
     'authorization', `Bearer ${token}`
     }
    ```
-   
-   
+   success
+   ```
+   	{
+  "status": "success",
+  "data": {
+    "message": "Article successfully posted",
+    "articleId": INT,
+    "createdOn": STRING,
+    "title": STRING,
+    "userId": INT
+  }
+}
+  
 - View Article by Id: GET /articles/:id
+
 - Edit Article:  PATCH /articles/:id
 - Delete Article: DELETE /articles/:id
 - Comment POST /gifs/:id/comment
